@@ -17,7 +17,6 @@ class CreateClienteTelefonesTable extends Migration
             $table->id();
 			$table->bigInteger("cliente")->unsigned();
 			$table->string("telefone", 20);
-			//$table->boolean("preferencial");
 			$table->foreign("cliente")->references("id")->on("cliente");
             $table->timestamps();
         });

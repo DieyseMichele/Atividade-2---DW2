@@ -3,9 +3,12 @@
 	<head>
 		<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
 		<link rel="stylesheet" href="{{ asset('css/estilo.css') }}" />
+		<link rel="stylesheet" href="{{ asset('css/fontAwesome.css') }}" />
 		<script src="{{ asset('js/jquery.js') }}"></script>
 		<script src="{{ asset('js/bootstrap.js') }}"></script>
+		<script src="{{ asset('js/jquery.mask.js') }}"></script>
 		<script src="{{ asset('js/script.js') }}"></script>
+		<script src="{{ asset('js/fontAwesome.js') }}"></script>
 	</head>
 	<body>
 		

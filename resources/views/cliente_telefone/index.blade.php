@@ -11,10 +11,8 @@
 		</div>
 		<div class="form-group col-6">
 			<label for="telefone">Telefone Preferencial: </label></br>
-			<input type="radio" id="preferencial" name="preferencial" value="{{ $cliente_telefone->preferencial}}"/>
+			<input type="checkbox" id="preferencial" name="preferencial" value="1"/>
 			<label for="preferencial">Sim </label>
-			<input type="radio" id="preferencial" name="preferencial" value="{{ $cliente_telefone->preferencial}}" />
-			<label for="preferencial">Não </label>
 		</div>
 		<div class="form-group col-4">
 			<a class="btn btn-primary" href="/cliente_telefone?cliente={{ $cliente_telefone->cliente }}">Novo</a>
@@ -24,7 +22,30 @@
 		</div>
 	</form>
 		
-	</form>
+	<script>
+		$(document).ready(function() {
+			
+			var options =  {
+				onKeyPress: function(telefone, e, field, options) {
+					var masks = [ '(00) 00000-0000', '(00) 0000-00009' ];
+					var mask = (telefone.replace(/\D/g, '').length == 11) ? masks[0] : masks[1];
+					$('#telefone').mask(mask, options);
+				}
+			};
+			$('#telefone').mask('(00) 0000-00009', options);
+			
+			$("span.telefone").each(function() {
+				var len = $(this).html().trim().length;
+				if (len == 11) {
+					$(this).mask('(00) 00000-0000', options);
+				} else {
+					$(this).mask('(00) 0000-0000', options);
+				}
+			});
+			
+			
+		});
+	</script>
 	
 @endsection
 
@@ -44,7 +65,14 @@
 			@foreach ($cliente_telefones as $cliente_telefone)
 				
 				<tr>
-					<td>{{ $cliente_telefone->telefone }}</td>
+					<td>
+						@if ($cliente_telefone->preferencial == 1)
+							<i class="fa fa-star"></i>
+						@endif
+						<span class="telefone">
+							{{ $cliente_telefone->telefone }} 
+						</span>
+					</td>
 					<td>
 						<form action="/cliente_telefone/{{ $cliente_telefone->id }}" method="POST">
 							@csrf
@@ -60,9 +88,7 @@
 		
 	</table>
 	
-	<script>
-		
-	</script>
+	
 	
 @endsection
 
